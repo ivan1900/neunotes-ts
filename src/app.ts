@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import AppDataSource from './data-source';
+import api from './api';
 
 export const app = express();
 
@@ -17,5 +18,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 AppDataSource.initialize();
+
+app.use('/api/v1', api);
 
 export default app;
