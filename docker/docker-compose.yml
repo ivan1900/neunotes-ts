@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  mysql_neunotesTS:
+    container_name: mysql_neunotesTS
+    image: mysql:8.0.28
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_CONTAINER_PORT}
+    volumes:
+      - './mysql/initdb:/docker-entrypoint-initdb.d'
+      - './mysql/datadir:/var/lib/mysql'
+    environment:
+      TZ: "Europe/Madrid"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD_ROOT}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB}
