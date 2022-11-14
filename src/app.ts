@@ -10,14 +10,13 @@ import api from './api';
 export const app = express();
 
 dotenv.config();
+AppDataSource.initialize();
 
 // middelwares
 app.use(cors({ origin: '*' }));
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
-
-AppDataSource.initialize();
 
 app.use('/api/v1', api);
 

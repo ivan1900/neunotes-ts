@@ -1,10 +1,4 @@
-type Params = {
-    name: string;
-    lastName: string;
-    userName: string;
-    email: string;
-    password: string;
-};
+import { userDto } from './userTypes.interfaces';
 
 export default class CreateUserCommand {
   name: string;
@@ -13,7 +7,7 @@ export default class CreateUserCommand {
   email: string;
   password: string;
 
-  constructor(params: Params) {
+  constructor(params: userDto) {
     this.name = params.name;
     this.lastName = params.lastName;
     this.userName = params.userName;

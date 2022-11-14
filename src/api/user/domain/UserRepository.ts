@@ -2,5 +2,5 @@
 import CreateUserCommand from './CreateUserCommand';
 
 export interface UserRepository {
-  save(createUserCommand: CreateUserCommand): Promise<void>;
+  save(createUserCommand: CreateUserCommand): Promise<boolean>;
 }
