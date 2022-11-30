@@ -1,13 +1,10 @@
 import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 import User from './entity/User';
-import { database1667897855144 } from './migrations/1667897855144-database';
-import { database1667899175885 } from './migrations/1667899175885-database';
-import { database1668021184752 } from './migrations/1668021184752-database';
 
 dotenv.config();
 
-const AppDataSource = new DataSource({
+const DBOrigin = new DataSource({
   type: 'mysql',
   host: process.env.MYSQL_HOST,
   port: Number(process.env.MYSQL_PORT),
@@ -19,8 +16,18 @@ const AppDataSource = new DataSource({
   logging: false,
   entities: [User],
   subscribers: [],
-  // migrations: ['src/migration/**/*.ts'],
-  migrations: [database1667897855144, database1667899175885, database1668021184752],
+  migrations: ['./src/migrations/**/*.ts'],
 });
+
+const DBMemory = new DataSource({
+  type: 'sqlite',
+  database: ':memory:',
+  dropSchema: true,
+  entities: [User],
+  synchronize: true,
+  logging: false,
+});
+
+const AppDataSource = process.env.NODE_ENV !== 'test' ? DBOrigin : DBMemory;
 
 export default AppDataSource;
