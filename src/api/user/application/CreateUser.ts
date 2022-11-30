@@ -1,6 +1,8 @@
 import CreateUserCommand from '../domain/CreateUserCommand';
 import UserModel from '../domain/UserModel';
 import { UserRepository } from '../domain/UserRepository';
+import EventBus from '../../shared/infrastructure/EventBus';
+import { DomainEvent } from '../../shared/domain/DomainEvent';
 
 class CreateUser {
   private userRepository;
@@ -19,6 +21,8 @@ class CreateUser {
     );
     try {
       await this.userRepository.save(userModel);
+      const event = new DomainEvent(new Date(), { user: 1 });
+      EventBus.getInstance().dispatch('UserWasCreated', event);
       return true;
     } catch (err) {
       return err;

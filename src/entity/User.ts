@@ -21,7 +21,7 @@ class User {
   @Column()
     userName!: string;
   @Index({ unique: true })
-  @PrimaryColumn()
+  @Column()
     email!: string;
   @Column()
     password!: string;

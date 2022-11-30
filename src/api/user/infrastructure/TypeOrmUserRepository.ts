@@ -1,15 +1,23 @@
-import { injectable } from 'tsyringe';
+// import { injectable } from 'tsyringe';
 import { UserRepository } from '../domain/UserRepository';
 import AppDataSource from '../../../data-source';
 import User from '../../../entity/User';
 import UserModel from '../domain/UserModel';
+import { Nullable } from '../../shared/domain/Nullable';
 
-@injectable()
+// @injectable()
 class TypeOrmUserRepository implements UserRepository {
   private repository;
 
   constructor() {
     this.repository = AppDataSource.getRepository(User);
+  }
+
+  public async findUserByMail(email: string): Promise<Nullable<UserModel>> {
+    const user = this.repository.findOneBy({
+      email,
+    });
+    return null;
   }
 
   public async save(user: UserModel): Promise<boolean> {

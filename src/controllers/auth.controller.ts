@@ -9,19 +9,24 @@ export const signup = async (req: Request, res: Response) => {
   const userRepository = container.resolve(TypeOrmUserRepository);
 
   const createUser = new CreateUser(userRepository);
-  const request: userDto = {
-    name: req.body.name,
-    lastName: req.body.lastName,
-    userName: req.body.userName,
-    email: req.body.email,
-    password: req.body.password,
-  };
+  try {
+    const request: userDto = {
+      name: req.body.name,
+      lastName: req.body.lastName,
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password,
+    };
 
-  const createUserCommand = new CreateUserCommand(request);
-  const result = await createUser.run(createUserCommand);
+    const createUserCommand = new CreateUserCommand(request);
+    const result = await createUser.run(createUserCommand);
+    if (result) res.status(200);
 
-  if (result) return res.status(200);
-  return res.status(500);
+    res.send('respuesta');
+  } catch (error) {
+    res.status(400);
+    res.send(error);
+  }
 };
 
 export const signin = async (req: Request, res: Response) => {

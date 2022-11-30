@@ -1,4 +1,7 @@
-import encryptPassword from '../../shared/domain/encryptPassword';
+import {
+  encryptPassword,
+  comparePassword,
+} from '../../shared/domain/EncryptHelper';
 
 export default class UserModel {
   readonly name: string;
@@ -29,5 +32,9 @@ export default class UserModel {
     password: string,
   ): UserModel {
     return new UserModel(name, lastName, userName, email, password);
+  }
+
+  public isValidPassword(password: string) {
+    return comparePassword(password, this.password);
   }
 }
