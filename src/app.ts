@@ -6,11 +6,14 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import AppDataSource from './data-source';
 import api from './api';
+import InitSubscribers from './api/shared/domain/InitSubscribers';
 
 export const app = express();
 
 dotenv.config();
 AppDataSource.initialize();
+
+InitSubscribers();
 
 // middelwares
 app.use(cors({ origin: '*' }));
