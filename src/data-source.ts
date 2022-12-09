@@ -25,6 +25,7 @@ const DBMemory = new DataSource({
   dropSchema: true,
   entities: [User],
   synchronize: true,
+  migrationsRun: true,
   logging: false,
 });
 
