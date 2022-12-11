@@ -2,18 +2,7 @@
 import TypeOrmUserRepository from '../../../src/api/user/infrastructure/TypeOrmUserRepository';
 import UserFinder from '../../../src/api/user/application/UserFinder';
 import UserModel from '../../../src/api/user/domain/UserModel';
-
-const mockGetUserByMail = jest
-  .fn()
-  .mockResolvedValue(new UserModel('a', 'a', 'a', 'user@user.com', 'a'));
-
-const mockSave = jest.fn().mockResolvedValue(true);
-
-jest.mock('../../../src/api/user/infrastructure/TypeOrmUserRepository', () => {
-  return jest.fn().mockImplementation(() => {
-    return { findUserByMail: mockGetUserByMail, save: mockSave };
-  });
-});
+jest.mock('./../../../src/api/user/infrastructure/TypeOrmUserRepository');
 
 describe('get user model', () => {
   afterAll(() => {
