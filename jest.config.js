@@ -4,9 +4,5 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: true,
   verbose: true,
-  coveragePathIgnorePatterns: [
-    '/node_modules/',
-    '/test/',
-    '/dist/',
-  ],
+  coveragePathIgnorePatterns: ['/node_modules/', '/test/', '/dist/'],
 };

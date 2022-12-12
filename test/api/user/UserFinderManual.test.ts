@@ -1,4 +1,4 @@
-// Test mocking factory
+// Test mocking manual
 import TypeOrmUserRepository from '../../../src/api/user/infrastructure/TypeOrmUserRepository';
 import UserFinder from '../../../src/api/user/application/UserFinder';
 import UserModel from '../../../src/api/user/domain/UserModel';
@@ -15,5 +15,12 @@ describe('get user model', () => {
 
     expect(user).toBeInstanceOf(UserModel);
     expect(user.email).toBe('user@user.com');
+  });
+  test('user not exists', async () => {
+    const userFinder = new UserFinder(new TypeOrmUserRepository());
+
+    const user = await userFinder.byMail('not@exists.com');
+
+    expect(user).toBeNull();
   });
 });
