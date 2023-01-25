@@ -6,7 +6,13 @@ import UserModel from '../../../src/api/user/domain/UserModel';
 const mockGetUserByMail = jest
   .fn()
   .mockResolvedValueOnce(
-    new UserModel('juan', 'bic', 'jbic', 'user@user.com', 'pass'),
+    new UserModel({
+      name: 'Tomas',
+      lastName: 'López',
+      userName: 'tlopez',
+      email: 'tomas.lopez@test.com',
+      password: 'pass',
+    }),
   )
   .mockResolvedValueOnce(null);
 
@@ -24,11 +30,11 @@ describe('get user model', () => {
   });
   test('existing user', async () => {
     const userFinder = new UserFinder(new TypeOrmUserRepository());
-
-    const user = (await userFinder.byMail('user@user.com')) as UserModel;
+    const email = 'tomas.lopez@test.com';
+    const user = (await userFinder.byMail(email)) as UserModel;
 
     expect(user).toBeInstanceOf(UserModel);
-    expect(user.email).toBe('user@user.com');
+    expect(user.email).toBe(email);
   });
   test('user not exists', async () => {
     const userFinder = new UserFinder(new TypeOrmUserRepository());

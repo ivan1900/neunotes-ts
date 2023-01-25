@@ -3,6 +3,14 @@ import {
   comparePassword,
 } from '../../shared/domain/EncryptHelper';
 
+interface UserModelParams {
+  name: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  password: string;
+}
+
 export default class UserModel {
   readonly name: string;
   readonly lastName: string;
@@ -10,13 +18,7 @@ export default class UserModel {
   readonly email: string;
   readonly password: string;
 
-  constructor(
-    name: string,
-    lastName: string,
-    userName: string,
-    email: string,
-    password: string,
-  ) {
+  constructor({ name, lastName, userName, email, password }: UserModelParams) {
     this.name = name;
     this.lastName = lastName;
     this.userName = userName;
@@ -31,7 +33,7 @@ export default class UserModel {
     email: string,
     password: string,
   ): UserModel {
-    return new UserModel(name, lastName, userName, email, password);
+    return new UserModel({ name, lastName, userName, email, password });
   }
 
   public isValidPassword(password: string) {

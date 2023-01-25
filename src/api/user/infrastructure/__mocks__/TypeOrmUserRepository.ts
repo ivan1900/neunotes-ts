@@ -4,7 +4,13 @@ import UserModel from '../../domain/UserModel';
 export const findUserByMail = jest
   .fn()
   .mockResolvedValueOnce(
-    new UserModel('name', 'surname', 'user', 'user@user.com', 'pass'),
+    new UserModel({
+      name: 'Tomas',
+      lastName: 'López',
+      userName: 'tlopez',
+      email: 'tomas.lopez@test.com',
+      password: 'pass',
+    }),
   )
   .mockResolvedValue(null);
 
