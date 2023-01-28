@@ -12,7 +12,7 @@ const DBOrigin = new DataSource({
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DB,
   synchronize: true,
-  migrationsRun: true,
+  migrationsRun: false,
   logging: false,
   entities: [User],
   subscribers: [],
