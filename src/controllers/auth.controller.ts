@@ -4,6 +4,8 @@ import CreateUser from '../api/user/application/CreateUser';
 import CreateUserCommand from '../api/user/domain/CreateUserCommand';
 import { userDto } from '../api/user/domain/userTypes.interfaces';
 import TypeOrmUserRepository from '../api/user/infrastructure/TypeOrmUserRepository';
+import LoginUserCommand from '../api/user/domain/LoginUserCommand';
+import { LoginUserData } from '../api/user/domain/LoginUserCommand';
 
 export const signup = async (req: Request, res: Response) => {
   const userRepository = container.resolve(TypeOrmUserRepository);
@@ -30,5 +32,11 @@ export const signup = async (req: Request, res: Response) => {
 };
 
 export const signin = async (req: Request, res: Response) => {
+  const request: LoginUserData = {
+    userName: req.body.userName,
+    password: req.body.password,
+  };
+
+  const loginUserCommand = new LoginUserCommand(request);
   res.status(200);
 };
