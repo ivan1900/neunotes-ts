@@ -5,32 +5,31 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  PrimaryColumn,
   Index,
 } from 'typeorm';
 
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
-    id!: number;
+  id!: number;
   @Column()
-    name!: string;
+  name!: string;
   @Column()
-    lastName!: string;
+  lastName!: string;
   @Index({ unique: true })
   @Column()
-    userName!: string;
+  userName!: string;
   @Index({ unique: true })
   @Column()
-    email!: string;
+  email!: string;
   @Column()
-    password!: string;
+  password!: string;
   @CreateDateColumn()
-    created_at!: string;
+  created_at!: string;
   @UpdateDateColumn()
-    updated_at!: string;
+  updated_at!: string;
   @DeleteDateColumn()
-    deleted_at!: string;
+  deleted_at!: string;
 }
 
 export default User;
