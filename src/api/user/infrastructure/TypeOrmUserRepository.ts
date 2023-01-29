@@ -4,6 +4,7 @@ import AppDataSource from '../../../data-source';
 import User from '../../../entity/User';
 import UserModel from '../domain/UserModel';
 import { Nullable } from '../../shared/domain/Nullable';
+import UserMapper from './UserMapper';
 
 // @injectable()
 class TypeOrmUserRepository implements UserRepository {
@@ -13,11 +14,20 @@ class TypeOrmUserRepository implements UserRepository {
     this.repository = AppDataSource.getRepository(User);
   }
 
-  public async findUserByMail(email: string): Promise<Nullable<UserModel>> {
-    const user = this.repository.findOneBy({
+  public async findUserByMail(email: string): Promise<UserModel | null> {
+    const user = await this.repository.findOneBy({
       email,
     });
-    return null;
+
+    return user ? UserModel.create(user) : null;
+  }
+
+  public async FindUserByUserName(userName: string): Promise<UserModel | null> {
+    const user = await this.repository.findOneBy({
+      userName,
+    });
+
+    return user ? UserModel.create(user) : null;
   }
 
   public async save(user: UserModel): Promise<boolean> {

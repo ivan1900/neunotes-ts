@@ -1,7 +1,4 @@
-import {
-  encryptPassword,
-  comparePassword,
-} from '../../shared/domain/EncryptHelper';
+import { encryptPassword, comparePassword } from '../../shared/domain/EncryptHelper';
 
 interface UserModelParams {
   name: string;
@@ -26,13 +23,7 @@ export default class UserModel {
     this.password = encryptPassword(password);
   }
 
-  static create(
-    name: string,
-    lastName: string,
-    userName: string,
-    email: string,
-    password: string,
-  ): UserModel {
+  static create({ name, lastName, userName, email, password }: UserModelParams): UserModel {
     return new UserModel({ name, lastName, userName, email, password });
   }
 

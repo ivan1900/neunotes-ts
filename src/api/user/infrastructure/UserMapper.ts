@@ -4,20 +4,16 @@ import User from '../../../entity/User';
 // el mapper convertira a dto a persistencia y a dominio
 
 class UserMapper {
-  private userModel;
+  public static getUserModel(user: User) {
+    const userModel = UserModel.create({
+      name: user.name,
+      lastName: user.lastName,
+      userName: user.userName,
+      email: user.email,
+      password: user.password,
+    });
 
-  constructor(user: User) {
-    this.userModel = new UserModel(
-      user.name,
-      user.lastName,
-      user.userName,
-      user.email,
-      user.password,
-    );
-  }
-
-  public getUserModel() {
-    return this.userModel;
+    return userModel;
   }
 }
 
